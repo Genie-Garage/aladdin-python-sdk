@@ -1,0 +1,21 @@
+[project]
+name = "aladdin_sdk"
+version = "1.0.0"
+authors = [
+    { name="Adam Johnston", email="adam_johnston@geniecompany.com" },
+]
+description = "An SDK to interact with the AladdinConnect (or OHD) partner API"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/..."
+Issues = "https://github.com/.../issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
