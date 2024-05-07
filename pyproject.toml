@@ -1,6 +1,6 @@
 [project]
-name = "aladdin_sdk"
-version = "1.0.0"
+name = "genie_partner_sdk"
+version = "1.0.1"
 authors = [
     { name="Adam Johnston", email="adam_johnston@geniecompany.com" },
 ]
@@ -13,8 +13,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/..."
-Issues = "https://github.com/.../issues"
+Homepage = "https://github.com/genie-garage/aladdin-python-sdk"
+Issues = "https://github.com/genie-garage/aladdin-python-sdk/issues"
 
 [build-system]
 requires = ["hatchling"]
