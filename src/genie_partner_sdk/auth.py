@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from aiohttp import ClientSession
+from aiohttp import ClientSession, ClientResponse
 import logging
 
 
