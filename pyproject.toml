@@ -6,6 +6,7 @@ authors = [
 ]
 description = "An SDK to interact with the AladdinConnect (or OHD) partner API"
 readme = "README.md"
+license = { file="LICENSE" }
 requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
