@@ -6,7 +6,7 @@ import logging
 class Auth:
     """Class to make authenticated requests"""
 
-    def __init__(self, websession: ClientSession, host: str, access_token: str, api_key: str):
+    def __init__(self, websession: ClientSession, host: str, access_token: str, api_key: str) -> None:
         """Initialize the auth."""
         self._logger = logging.getLogger(__name__)
         self.websession = websession
