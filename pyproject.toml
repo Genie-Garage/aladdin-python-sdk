@@ -1,6 +1,6 @@
 [project]
 name = "genie_partner_sdk"
-version = "1.0.6"
+version = "1.0.7"
 authors = [
     { name="Adam Johnston", email="adam_johnston@geniecompany.com" },
 ]
