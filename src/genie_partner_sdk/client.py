@@ -8,7 +8,7 @@ from .auth import Auth
 class AladdinConnectClient:
     """Aladdin Connect API Client"""
 
-    def __init__(self, session: Auth):
+    def __init__(self, session: Auth) -> None:
         self._session = session
         self._logger = logging.getLogger(__name__)
         self._doors = []
@@ -33,15 +33,15 @@ class AladdinConnectClient:
         self._doors = doors
         return doors
 
-    async def update_door(self, device_id: str, door_number: int):
+    async def update_door(self, device_id: str, door_number: int) -> None:
         current: GarageDoor | None = None
         for door in self._doors:
             if door.device_id == device_id and door.door_number == door_number:
                 current = door
                 break
 
-        if current == None:
-            self._logger.warn(f"Attempted to update non-existant door {device_id}-{door_number}")
+        if current is None:
+            self._logger.warning(f"Attempted to update non-existant door {device_id}-{door_number}")
             return
 
         response = await self._session.request("GET", f"devices/{device_id}/doors/{door_number}")
@@ -59,13 +59,14 @@ class AladdinConnectClient:
     async def close_door(self, device_id: str, door_index: int) -> bool:
         return await self._issue_command(device_id, door_index, "close")
 
-    def get_door_status(self, device_id, door_number):
+    def get_door_status(self, device_id: str, door_number: int) -> str | None:
         """Get the door status."""
         for door in self._doors:
             if door.device_id == device_id and door.door_number == door_number:
                 return door.status
+        return None
 
-    def get_battery_status(self, device_id, door_number):
+    def get_battery_status(self, device_id: str, door_number: int) -> int | None:
         """Async call to get battery status for door."""
         for door in self._doors:
             if door.device_id == device_id and door.door_number == door_number:
