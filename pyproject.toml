@@ -1,6 +1,6 @@
 [project]
 name = "genie_partner_sdk"
-version = "1.0.8"
+version = "1.0.9"
 authors = [
     { name="Adam Johnston", email="adam_johnston@geniecompany.com" },
 ]
@@ -20,8 +20,3 @@ Issues = "https://github.com/genie-garage/aladdin-python-sdk/issues"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-[tool.hatch.build.targets.wheel]
-include = [
-    "src/genie_partner_sdk",
-]
