@@ -1,9 +1,10 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
+from typing import Any
 from aiohttp import ClientSession, ClientResponse
 import logging
 
 
-class Auth:
+class Auth(ABC):
     """Class to make authenticated requests"""
 
     def __init__(self, websession: ClientSession, host: str, access_token: str, api_key: str) -> None:
@@ -18,7 +19,7 @@ class Auth:
     async def async_get_access_token(self) -> str:
         """Return a valid access token."""
 
-    async def request(self, method: str, path: str, **kwargs) -> ClientResponse:
+    async def request(self, method: str, path: str, **kwargs: Any) -> ClientResponse:
         """Make a request."""
         headers = kwargs.get("headers")
 

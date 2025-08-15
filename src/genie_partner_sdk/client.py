@@ -11,7 +11,7 @@ class AladdinConnectClient:
     def __init__(self, session: Auth) -> None:
         self._session = session
         self._logger = logging.getLogger(__name__)
-        self._doors = []
+        self._doors: list[GarageDoor] = []
 
     async def get_doors(self) -> list[GarageDoor]:
         response = await self._session.request("GET", "devices")
