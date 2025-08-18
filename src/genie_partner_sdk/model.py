@@ -17,11 +17,11 @@ class GarageDoorData(TypedDict):
 class GarageDoor:
     """Aladdin Garage Door Entity"""
 
-    def __init__(self, data: GarageDoorData):
-        self.device_id = data["device_id"]
-        self.door_number = data["door_number"]
-        self.unique_id = f"{self.device_id}-{self.door_number}"
-        self.name = data["name"]
-        self.status = data["status"]
-        self.link_status = data["link_status"]
-        self.battery_level = data["battery_level"]
+    def __init__(self, data: GarageDoorData) -> None:
+        self.device_id: str = data["device_id"]
+        self.door_number: int = data["door_number"]
+        self.unique_id: str = f"{self.device_id}-{self.door_number}"
+        self.name: str = data["name"]
+        self.status: str = data["status"]
+        self.link_status: str = data["link_status"]
+        self.battery_level: int = data["battery_level"]
