@@ -26,9 +26,10 @@ class AladdinConnectClient:
                     "name": door["name"],
                     "status": door["status"],
                     "link_status": door["link_status"],
-                    # payload carries both "batteryLevel" and legacy "battery";
-                    # prefer camelCase, fall back, and leave None when absent (no fake 0)
-                    "battery_level": door.get("batteryLevel", door.get("battery")),
+                    # devices list carries both "batteryLevel" and a legacy "battery".
+                    # These openers report 0 when there is no reading, so map 0/absent
+                    # to None (unavailable) instead of surfacing a misleading 0%.
+                    "battery_level": door.get("batteryLevel", door.get("battery")) or None,
                 }))
 
         self._logger.debug(f"ALADDIN GET DOORS RESULT: {doors}")
@@ -50,9 +51,9 @@ class AladdinConnectClient:
         data = await response.json()
         current.status = data["status"]
         current.link_status = data["linkStatus"]
-        # this endpoint uses camelCase (see linkStatus above), so the key is
-        # "batteryLevel", not "battery_level"; leave None when absent (no fake 0)
-        current.battery_level = data.get("batteryLevel", data.get("battery_level"))
+        # the door-detail endpoint carries both "batteryLevel" and "battery_level";
+        # map 0/absent to None for the same reason as get_doors (no fake 0%)
+        current.battery_level = data.get("batteryLevel", data.get("battery_level")) or None
 
         self._logger.debug(f"ALADDIN UPDATE DOOR RESULT: {current}")
         self._doors = [current if d.unique_id == current.unique_id else d for d in self._doors]
