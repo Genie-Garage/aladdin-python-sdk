@@ -26,7 +26,9 @@ class AladdinConnectClient:
                     "name": door["name"],
                     "status": door["status"],
                     "link_status": door["link_status"],
-                    "battery_level": door.get("battery", 0),
+                    # devices list uses snake_case; try the correct key, then the
+                    # legacy "battery" name, and leave None when absent (no fake 0)
+                    "battery_level": door.get("battery_level", door.get("battery")),
                 }))
 
         self._logger.debug(f"ALADDIN GET DOORS RESULT: {doors}")
@@ -48,7 +50,9 @@ class AladdinConnectClient:
         data = await response.json()
         current.status = data["status"]
         current.link_status = data["linkStatus"]
-        current.battery_level = data.get("battery_level", 0)
+        # single-door endpoint uses camelCase (see linkStatus above); try that key,
+        # then the snake_case name, and leave None when absent (no fake 0)
+        current.battery_level = data.get("batteryLevel", data.get("battery_level"))
 
         self._logger.debug(f"ALADDIN UPDATE DOOR RESULT: {current}")
         self._doors = [current if d.unique_id == current.unique_id else d for d in self._doors]
